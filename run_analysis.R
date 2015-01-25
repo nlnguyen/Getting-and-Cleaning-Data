@@ -39,6 +39,7 @@ run_analysis <- function()
       #    will be dropped in the next step, their removal is ommitted to alleviate the operations.
       colNames <- as.character(read.table("./UCI_HAR_Dataset/features.txt")[,2])
       colNames <- gsub("BodyBody", "Body", colNames) # replace 'BodyBody' by 'Body'
+      colNames <- gsub("Mean", "Average", colNames) # replace 'Mean' by 'Average'
       colNames <- gsub("\\()", "", colNames)  # remove all '()'
       colNames <- gsub("\\,", ".", colNames)  # replace ',' with '.'
       colNames <- gsub("\\(", "_", colNames)  # replace '(' with '_'
@@ -50,7 +51,7 @@ run_analysis <- function()
       
       # 4. Extracts the mean and standard deviation for each measurement.
       #    a. identify indices of variables to keep (mean and std) and those to let go (angle)
-      meanStr <- grepl("mean", varNames, ignore.case=T)
+      meanStr <- grepl("average", varNames, ignore.case=T)
       stdStr <- grepl("std", varNames, ignore.case=T)
       angleStr <- grepl("angle", varNames, ignore.case=T)
       
